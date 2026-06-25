@@ -10,7 +10,7 @@ load_dotenv()
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 if not DATABASE_URL:
-    raise ValueError("DATABASE_URL .env file me nahi mila")
+    raise ValueError("DATABASE_URL .env variable is not set. Please check your .env file.")
 
 
 engine = create_engine(

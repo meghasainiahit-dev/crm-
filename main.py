@@ -4,6 +4,9 @@ from sqlalchemy import text
 from app.routes.company_route import router as company_router
 from app.database.database import engine
 from app.models.company import Company
+from app.models.department import Department
+from app.models.task import Task
+from app.models.user import User
 from app.models import department, task, user
 from app.routes import (
     agent_route,
@@ -21,6 +24,10 @@ app = FastAPI(
 
 # Create tables
 Company.metadata.create_all(bind=engine)
+Department.metadata.create_all(bind=engine)
+Task.metadata.create_all(bind=engine)
+User.metadata.create_all(bind=engine)
+
 
 app.include_router(company_router)
 app.include_router(company_route.router)
