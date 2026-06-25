@@ -9,6 +9,7 @@ from app.schema.company_schema import (
 from app.service.company_service import (
     create_company,
     get_companies,
+    get_company_by_id,
     update_company,
     delete_company
 )
@@ -47,6 +48,24 @@ def update(
         db,
         company_id,
         data
+    )
+
+    if not company:
+        raise HTTPException(
+            status_code=404,
+            detail="Company not found"
+        )
+
+    return company
+
+@router.get("/{company_id}")
+def get_company(
+    company_id: int,
+    db: Session = Depends(get_db)
+):
+    company = get_company_by_id(
+        db,
+        company_id
     )
 
     if not company:

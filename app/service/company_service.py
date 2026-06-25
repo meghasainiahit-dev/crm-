@@ -8,6 +8,7 @@ from app.utils.security import hash_password
 
 
 def create_company(db: Session, data):
+
     company_exists = db.query(Company).filter(
         Company.email == data.email
     ).first()
@@ -90,21 +91,48 @@ def create_company(db: Session, data):
         db.rollback()
         raise
 
+    company = Company(**data.model_dump())
+
+    db.add(company)
+    db.commit()
+    db.refresh(company)
+
+    return company
+
+
 
 def get_companies(db: Session):
     return db.query(Company).all()
 
 
-def get_company(db: Session, company_id: int):
+
+
+def get_company_by_id(db: Session, company_id: int):
+    return db.query(Company).filter(
+        Company.id == company_id
+    ).first()
+
+
+def update_company(db: Session, company_id: int, data):
     company = db.query(Company).filter(
         Company.id == company_id
     ).first()
 
     if not company:
+
         raise HTTPException(
             status_code=404,
             detail="Company not found"
         )
+        return None
+
+    update_data = data.model_dump(exclude_unset=True)
+
+    for key, value in update_data.items():
+        setattr(company, key, value)
+
+    db.commit()
+    db.refresh(company)
 
     return company
 
