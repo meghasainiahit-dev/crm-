@@ -3,15 +3,23 @@ from app.models.company import Company
 
 
 def create_company(db: Session, data):
-    company = Company(**data.dict())
+    company = Company(**data.model_dump())
+
     db.add(company)
     db.commit()
     db.refresh(company)
+
     return company
 
 
 def get_companies(db: Session):
     return db.query(Company).all()
+
+
+def get_company_by_id(db: Session, company_id: int):
+    return db.query(Company).filter(
+        Company.id == company_id
+    ).first()
 
 
 def update_company(db: Session, company_id: int, data):
@@ -22,7 +30,7 @@ def update_company(db: Session, company_id: int, data):
     if not company:
         return None
 
-    update_data = data.dict(exclude_unset=True)
+    update_data = data.model_dump(exclude_unset=True)
 
     for key, value in update_data.items():
         setattr(company, key, value)
