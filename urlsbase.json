@@ -1,0 +1,25 @@
+{
+    "services": [
+        {
+            "name": "company",
+            "port": 8001,
+            "host": "http://localhost:8001",
+            "base_url": "/api/v1/company",
+            "enabled": true
+        },
+        {
+            "name": "department",
+            "port": 8002,
+            "host": "http://localhost:8002",
+            "base_url": "/api/v1/department",
+            "enabled": true
+        },
+        {
+            "name": "agent",
+            "port": 8003,
+            "host": "http://localhost:8003",
+            "base_url": "/api/v1/agent",
+            "enabled": true
+        }
+    ]
+}
