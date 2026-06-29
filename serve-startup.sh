@@ -116,7 +116,7 @@ def test_redis():
         print("✅ Redis Read/Write Test Passed")
         return True
 
-    except Exception as e:
+    except HTTPException as e:
         print(f"❌ Redis Test Failed: {e}")
         return False
 

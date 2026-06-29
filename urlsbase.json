@@ -15,7 +15,7 @@
             "enabled": true
         },
         {
-            "name": "agent",
+            "name": "users",
             "port": 8003,
             "host": "http://localhost:8003",
             "base_url": "/api/v1/agent",

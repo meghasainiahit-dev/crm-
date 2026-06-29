@@ -13,7 +13,7 @@ if not DATABASE_NAME:
 client=AsyncMongoClient(DATABASE_URL)
 database=client[DATABASE_NAME]
 
-department_collection=database["departments"]
+users_collection=database["users"]
 
 async def connect_database():
     await client.admin.command("ping")

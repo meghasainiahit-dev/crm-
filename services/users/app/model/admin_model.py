@@ -1,18 +1,22 @@
 from datetime import datetime, timezone
-from pydantic import BaseModel, ConfigDict, Field
+from typing import Literal
+
+from pydantic import BaseModel, ConfigDict, EmailStr, Field
 
 
-class DepartmentModel(BaseModel):
+class UserModel(BaseModel):
     id: str | None = Field(
         default=None,
         alias="_id"
     )
 
-    department_name: str
-    description: str | None = None
+    name: str
+    email: EmailStr
+    hashed_password: str
+
+    role: Literal["admin"] = "admin"
 
     company_id: str
-    created_by: str
 
     is_active: bool = True
 

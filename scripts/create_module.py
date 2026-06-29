@@ -78,7 +78,7 @@ def update_urlsbase(service_name: str):
             with open(json_file, "r", encoding="utf-8") as f:
                 data = json.load(f)
 
-        except Exception:
+        except HTTPException:
             data = {"services": []}
 
     # Duplicate Check
